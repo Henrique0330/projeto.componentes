@@ -59,8 +59,8 @@ const mostrarbotao = ref(false)
           </div>
 
           <div><label for="estado">Estado</label>
-            <select v-model="dados.estado" name="estado">
-              <option v-for="estado in estados" :value="estado.nome">{{ estado.sigla }}</option>
+            <select v-model="dados.estado" name="estado" v-for="estado in estados" :value="estado.nome" :key="estado">
+              <option>{{ estado.sigla }}</option>
             </select>
           </div>
         </div>

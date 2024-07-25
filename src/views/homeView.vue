@@ -1,6 +1,10 @@
 <script setup>
-import headerForm from '@/components/header-form.vue'
-import mainForm from '@/components/main-form.vue'
+import Cabecalho from '@/components/cabecalho.vue'
+import CamposForm from '@/components/campos-form.vue'
+import ResultadoForm from '@/components/resultado-form.vue'
+import {ref} from "vue"
+
+const dadosf = ref({})
 
 const estados = [
   { nome: 'Acre', sigla: 'AC' },
@@ -31,11 +35,17 @@ const estados = [
   { nome: 'Sergipe', sigla: 'SE' },
   { nome: 'Tocantins', sigla: 'TO' }
 ]
+
+function dados(dadosf){
+  dados.value=dadosf.value
+}
+
 </script>
 
 <template>
-  <headerForm />
-  <mainForm />
+  <Cabecalho />
+  <CamposForm :estados="estados" @dados="dados"/>
+  <ResultadoForm :dados="dadosf" />
 </template>
 
 <style scoped></style>

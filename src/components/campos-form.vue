@@ -1,32 +1,44 @@
 <script setup>
 
+defineProps({
+  estados: Array
+});
+
+const emit = defineEmits(["dados"])
+
+function save() {
+  emit("dados", { ...dados })
+}
+
+
+
 import {
   reactive,
-ref
+  ref
 } from "vue"
 
 const dados = reactive({
-  nome:"" ,
-  email:"" ,
-  senha:"" ,
-  confirsenha:"" ,
-  datanasc:"" ,
-  endereco:"" ,
-  cidade:"" ,
-  estado:"" ,
-  hobies:[] ,
-  linguagem:[] ,
+  nome: "",
+  email: "",
+  senha: "",
+  confirsenha: "",
+  datanasc: "",
+  endereco: "",
+  cidade: "",
+  estado: "",
+  hobies: [],
+  linguagem: [],
   biografia: ""
 });
 
-const mostrarbotao = ref(false)
+const mostrarbotao = ref(false);
 
 </script>
 
 <template>
   <main>
     <div class="cadastro">
-      <form @submit.prevent>
+      <form @submit.prevent="save">
         <div class="info-inicial">
           <div><label for="nome">Nome</label>
             <input v-model="dados.nome" type="text" name="nome" placeholder=" Nome (Ex: Ruan)">
@@ -41,7 +53,8 @@ const mostrarbotao = ref(false)
           </div>
 
           <div><label for="senha-confirmar">Confirmar Senha</label>
-            <input v-model="dados.confirsenha" type="password" name="senha-confirmar" placeholder="Confirmar Senha (Ex: 123456)">
+            <input v-model="dados.confirsenha" type="password" name="senha-confirmar"
+              placeholder="Confirmar Senha (Ex: 123456)">
           </div>
         </div>
 
@@ -51,7 +64,8 @@ const mostrarbotao = ref(false)
           </div>
 
           <div><label for="endereço">Endereço</label>
-            <input v-model="dados.endereco" type="text" name="endereço" placeholder="Endereço (Ex: Rua do Jorge 123, Itinga)">
+            <input v-model="dados.endereco" type="text" name="endereço"
+              placeholder="Endereço (Ex: Rua do Jorge 123, Itinga)">
           </div>
 
           <div><label for="cidade">Cidade</label>
@@ -59,8 +73,8 @@ const mostrarbotao = ref(false)
           </div>
 
           <div><label for="estado">Estado</label>
-            <select v-model="dados.estado" name="estado" v-for="estado in estados" :value="estado.nome" :key="estado">
-              <option>{{ estado.sigla }}</option>
+            <select v-model="dados.estado" name="estado">
+              <option v-for="estado in estados" :key="estado" :value="estado.nome">{{ estado.sigla }}</option>
             </select>
           </div>
         </div>
@@ -70,19 +84,19 @@ const mostrarbotao = ref(false)
         <div class="hobies-e-linguagem">
           <div class="hobies">
             <h2>Seus hobies</h2>
-            <div><input   value="Esporte" v-model="dados.hobies" name="esporte" type="checkbox">
+            <div><input value="Esporte" v-model="dados.hobies" name="esporte" type="checkbox">
               <label for="esporte">Esporte</label>
             </div>
 
-            <div> <input   value="Jogos" v-model="dados.hobies" name="jogos" type="checkbox">
+            <div> <input value="Jogos" v-model="dados.hobies" name="jogos" type="checkbox">
               <label for="jogos">Jogos</label>
             </div>
 
-            <div><input value="Viagem"  v-model="dados.hobies" name="viagem" type="checkbox">
+            <div><input value="Viagem" v-model="dados.hobies" name="viagem" type="checkbox">
               <label for="viagem">Viagem</label>
             </div>
 
-            <div><input  value="Culinaria" v-model="dados.hobies" name="culinaria" type="checkbox">
+            <div><input value="Culinaria" v-model="dados.hobies" name="culinaria" type="checkbox">
               <label for="culinaria">Culinária</label>
             </div>
           </div>
@@ -101,11 +115,11 @@ const mostrarbotao = ref(false)
             </div>
 
             <div>
-              <input  value="Python" v-model="dados.linguagem" name="python" type="checkbox">
+              <input value="Python" v-model="dados.linguagem" name="python" type="checkbox">
               <label for="python">Python</label>
             </div>
 
-            <div><input  value="Java" v-model="dados.linguagem" name="java" type="checkbox">
+            <div><input value="Java" v-model="dados.linguagem" name="java" type="checkbox">
               <label for="java">Java</label>
             </div>
           </div>
@@ -114,35 +128,16 @@ const mostrarbotao = ref(false)
 
         <div class="biografia">
           <h2>Biografia</h2>
-          <textarea  v-model="dados.biografia" class= "bio" name="biografia" cols="150%" rows="10"></textarea>
+          <textarea v-model="dados.biografia" class="bio" name="biografia" cols="150%" rows="10"></textarea>
         </div>
-         <div class="conteiner-botao">
-        <button @click="mostrarbotao = !mostrarbotao" class="botao-enviar">Enviar</button>
-      </div>
+          <button class="conteiner-botao enviar-botao" type="submit" >Enviar</button>
       </form>
-    </div>
-    <div class="conteiner-resultado">
-      <div v-if="mostrarbotao == true" class="resultado">
-        <h1>Resultado</h1>
-        <p>Nome: {{ dados.nome }}</p>
-        <p>Email: {{ dados.email }}</p>
-        <p>Senha: {{ dados.senha }}</p>
-        <p>Confirmar senha: {{ dados.confirsenha }}</p>
-        <p>Data de Nascimento: {{ dados.datanasc }}</p>
-        <p>Endereço:  {{ dados.endereco }}</p>
-        <p>Cidade:  {{ dados.cidade }}</p>
-        <p>Estado: {{ dados.estado }}</p>
-        <p >Hobie(s): <span v-for="hobie in dados.hobies">{{ hobie + " " }}</span></p>
-        <p>Linguagen(s) de Programação:  <span v-for="linguagens in dados.linguagem">{{ linguagens + " " }}</span></p>
-        <p>Biografia: <span>{{ dados.biografia }}</span></p>
-      </div>
     </div>
   </main>
 
 </template>
 
 <style scoped>
-
 form {
   display: flex;
   align-items: center;
@@ -188,24 +183,25 @@ form {
 }
 
 .hobies-e-linguagem {
-  margin: 50px; 
+  margin: 50px;
   display: flex;
   justify-content: space-between;
   width: 60%;
 }
 
-.hobies , .linguagem {
+.hobies,
+.linguagem {
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 10px ;
+  gap: 10px;
 }
 
 .biografia {
   margin: 3%;
 }
 
-.bio  {
+.bio {
   max-width: 55vw;
   max-height: 30vh;
 }
@@ -233,24 +229,4 @@ form {
   background-color: #505050;
   color: #fffafa;
 }
-
-.conteiner-resultado {
-  display: flex;
-  justify-content: center;
-}
-
-.resultado {
-  width: 60%;
-  background-color: #ccc;
-  border-radius: 10px;
-  margin: 5%;
-  display: flex;
-  flex-direction: column;
-}
-
-.resultado p , h1{
-  margin: 10px;
-  word-wrap: break-word;
-}
-
 </style>

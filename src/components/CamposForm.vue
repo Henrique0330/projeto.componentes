@@ -8,7 +8,8 @@ defineProps({
   estados: Array
 });
 
-const emit = defineEmits(["dados"])
+const emit = defineEmits(["dados", "mostrarbotao"])
+
 
 const dados = reactive({
   nome: "",
@@ -26,7 +27,6 @@ const dados = reactive({
 
 function save(i) {
   emit("dados", i)
-  console.log(i);
 }
 
 const mostrarbotao = ref(false);
@@ -36,7 +36,7 @@ const mostrarbotao = ref(false);
 <template>
   <main>
     <div class="cadastro">
-      <form @submit.prevent="save(dados)">
+      <form @submit.prevent="">
         <div class="info-inicial">
           <div><label for="nome">Nome</label>
             <input v-model="dados.nome" type="text" name="nome" placeholder=" Nome (Ex: Ruan)">
@@ -128,7 +128,7 @@ const mostrarbotao = ref(false);
           <h2>Biografia</h2>
           <textarea v-model="dados.biografia" class="bio" name="biografia" cols="150%" rows="10"></textarea>
         </div>
-          <button class="conteiner-botao enviar-botao" type="submit" >Enviar</button>
+          <button class="conteiner-botao" @click="save(dados) ,mostrarbotao = !mostrarbotao" >Enviar</button>
       </form>
     </div>
   </main>

@@ -4,8 +4,6 @@ import CamposForm from '@/components/CamposForm.vue'
 import ResultadoForm from '@/components/resultado-form.vue'
 import {ref} from "vue"
 
-const dadosf = ref({})
-
 const estados = [
   { nome: 'Acre', sigla: 'AC' },
   { nome: 'Alagoas', sigla: 'AL' },
@@ -36,18 +34,20 @@ const estados = [
   { nome: 'Tocantins', sigla: 'TO' }
 ]
 
-const teste = ref()
+const teste = ref(
+  {}
+);
 
 function dados(i){
   teste.value=i
-  console.log(i)
 }
+
 
 </script>
 
 <template>
   <Cabecalho />
-  <CamposForm :estados="estados" @dados="dados"/>
+  <CamposForm :estados="estados" @dados="dados" :mostrarbotao="mostrarbotao"/>
   <ResultadoForm :dados="teste" />
 </template>
 

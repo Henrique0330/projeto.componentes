@@ -1,8 +1,10 @@
 <script setup>
 
 defineProps({
-    dados: Object
+    dados: Object,
+    mostrar: Boolean
 })
+
 
 </script>
 <template>
@@ -17,9 +19,9 @@ defineProps({
             <p>Endereço: {{ dados.endereco }}</p>
             <p>Cidade: {{ dados.cidade }}</p>
             <p>Estado: {{ dados.estado }}</p>
-            <p>Hobie(s): <span v-for="hobie in dados.hobies">{{ hobie + " " }}</span></p>
-            <p>Linguagen(s) de Programação: <span v-for="linguagens in dados.linguagem">{{ linguagens + " " }}</span></p>
-            <p>Biografia: <span>{{ dados.biografia }}</span></p>
+            <p>Hobie(s): <span v-for="hobie in dados.hobies" :key="hobie">{{ hobie + " " }}</span></p>
+            <p>Linguagen(s) de Programação: <span v-for="linguagens in dados.linguagem" :key="linguagens">{{ linguagens + " " }}</span></p>
+            <p>Biografia: <span> {{ dados.biografia }} </span></p>
         </div>
     </div>
 </template>

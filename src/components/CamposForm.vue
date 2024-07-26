@@ -26,10 +26,12 @@ const dados = reactive({
 });
 
 function save(i) {
-  emit("dados", i)
+  if (i.senha != i.confirsenha) {
+    alert("As senhas não conferem");
+  } else {
+    emit("dados", i);
+  }
 }
-
-const mostrarbotao = ref(false);
 
 </script>
 
@@ -128,7 +130,7 @@ const mostrarbotao = ref(false);
           <h2>Biografia</h2>
           <textarea v-model="dados.biografia" class="bio" name="biografia" cols="150%" rows="10"></textarea>
         </div>
-          <button class="conteiner-botao" @click="save(dados) ,mostrarbotao = !mostrarbotao" >Enviar</button>
+        <button class="botao-enviar" @click="save(dados)">Enviar</button>
       </form>
     </div>
   </main>
@@ -205,12 +207,6 @@ form {
 }
 
 
-.conteiner-botao {
-  display: flex;
-  width: 60%;
-  flex-direction: column-reverse;
-}
-
 .botao-enviar {
   display: inline-block;
   padding: 10px 20px;
@@ -221,6 +217,7 @@ form {
   text-decoration: none;
   transition: background-color 0.3s, color 0.3s;
   cursor: pointer;
+  width: 60%;
 }
 
 .botao-enviar:hover {

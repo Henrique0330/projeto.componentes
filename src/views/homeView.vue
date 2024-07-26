@@ -38,17 +38,21 @@ const teste = ref(
   {}
 );
 
+const mostrarbotao = ref(false);
+
 function dados(i){
   teste.value=i
+  mostrarbotao.value = true
 }
-
 
 </script>
 
 <template>
   <Cabecalho />
-  <CamposForm :estados="estados" @dados="dados" :mostrarbotao="mostrarbotao"/>
-  <ResultadoForm :dados="teste" />
+  <CamposForm :estados="estados" @dados="dados"/>
+  <div v-if="mostrarbotao">
+    <ResultadoForm :dados="teste" />
+  </div>
 </template>
 
 <style scoped>

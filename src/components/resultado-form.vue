@@ -2,7 +2,6 @@
 
 defineProps({
     dados: Object,
-    mostrar: Boolean
 })
 
 

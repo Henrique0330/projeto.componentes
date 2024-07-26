@@ -1,21 +1,14 @@
 <script setup>
+import {
+  reactive,
+  ref
+} from "vue"
 
 defineProps({
   estados: Array
 });
 
 const emit = defineEmits(["dados"])
-
-function save() {
-  emit("dados", { ...dados })
-}
-
-
-
-import {
-  reactive,
-  ref
-} from "vue"
 
 const dados = reactive({
   nome: "",
@@ -31,6 +24,11 @@ const dados = reactive({
   biografia: ""
 });
 
+function save(i) {
+  emit("dados", i)
+  console.log(i);
+}
+
 const mostrarbotao = ref(false);
 
 </script>
@@ -38,7 +36,7 @@ const mostrarbotao = ref(false);
 <template>
   <main>
     <div class="cadastro">
-      <form @submit.prevent="save">
+      <form @submit.prevent="save(dados)">
         <div class="info-inicial">
           <div><label for="nome">Nome</label>
             <input v-model="dados.nome" type="text" name="nome" placeholder=" Nome (Ex: Ruan)">

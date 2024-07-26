@@ -1,6 +1,6 @@
 <script setup>
 import Cabecalho from '@/components/cabecalho.vue'
-import CamposForm from '@/components/campos-form.vue'
+import CamposForm from '@/components/CamposForm.vue'
 import ResultadoForm from '@/components/resultado-form.vue'
 import {ref} from "vue"
 
@@ -36,8 +36,11 @@ const estados = [
   { nome: 'Tocantins', sigla: 'TO' }
 ]
 
-function dados(dadosf){
-  dados.value=dadosf.value
+const teste = ref()
+
+function dados(i){
+  teste.value=i
+  console.log(i)
 }
 
 </script>
@@ -45,7 +48,9 @@ function dados(dadosf){
 <template>
   <Cabecalho />
   <CamposForm :estados="estados" @dados="dados"/>
-  <ResultadoForm :dados="dadosf" />
+  <ResultadoForm :dados="teste" />
 </template>
 
-<style scoped></style>
+<style scoped>
+
+</style>
